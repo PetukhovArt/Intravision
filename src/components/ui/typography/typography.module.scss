@@ -1,0 +1,27 @@
+@import '@/styles/mixins';
+
+//variants ========================================================================
+
+.body {
+  @include typography($fs: var(--font-size-m));
+}
+
+.body2 {
+  @include typography($fs: var(--font-size-xs));
+}
+
+.error {
+  @include typography($fs: var(--font-size-xs), $lh: var(--line-height-m));
+}
+
+//colors ================================================================================
+.primary {
+  color: var(--color-light-100);
+}
+
+.secondary {
+}
+
+.error {
+  color: var(--color-error);
+}

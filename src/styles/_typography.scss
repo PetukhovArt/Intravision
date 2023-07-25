@@ -1,0 +1,16 @@
+:root {
+  --font-family-primary: 'Roboto', sans-serif;
+
+  // line heights
+  --line-height-s: 18px; // form text
+  --line-height-m: 24px; // issue info
+
+  // font sizes
+  --font-size-xs: 0.75rem; //navbar , status button
+  --font-size-s: 0.875rem; // form headers , form text
+  --font-size-m: 1rem; // button , head table , table content
+
+  // font weights
+  --font-weight-regular: 300;
+  --font-weight-bold: 400; // form headers
+}

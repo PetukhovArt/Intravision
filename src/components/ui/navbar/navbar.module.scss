@@ -1,0 +1,53 @@
+@import '@/styles/mixins';
+
+.navbar {
+  padding: 16px 0 11px;
+  grid-area: navbar;
+  height: 100vh;
+  position: fixed;
+  width: 95px;
+  background-color: var(--color-accent-600);
+  color: var(--color-light-100);
+  @include flex-block($justify-content: space-between);
+
+  .container {
+    width: 100%;
+    @include flex-block($justify-content: 'none');
+  }
+
+  .logo {
+    display: block;
+    margin-bottom: 33px;
+  }
+
+  .item {
+    @include flex-block;
+    height: 70px;
+    text-align: center;
+    width: 100%;
+
+    &:hover {
+      background-color: var(--color-accent-500);
+      transition: 0.3s;
+    }
+
+    .active,
+    .link {
+      height: 100%;
+      width: 100%;
+      text-decoration: none;
+      font-size: var(--font-size-xs);
+      @include flex-block;
+    }
+
+    .active {
+      background-color: var(--color-accent-700);
+      transition: 0.3s;
+    }
+  }
+
+  .service {
+    display: block;
+    text-align: center;
+  }
+}
