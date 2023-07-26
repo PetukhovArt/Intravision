@@ -33,7 +33,7 @@ a:visited {
 body {
   margin: 0;
   padding: 0;
-  font-family: var(--font-family-primary), sans-serif;
+  font-family: var(--font-family-primary), var(--font-family-secondary), sans-serif;
   line-height: var(--line-height-s);
   color: var(--color-dark-500);
   background-color: var(--color-light-100);

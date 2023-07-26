@@ -6,26 +6,22 @@ import { useEffect, useState } from 'react';
 import {
   useGetTenantGuidQuery,
   useLazyGetPrioritiesQuery,
-  useLazyGetStatusesQuery,
-  useLazyGetTasksQuery,
   useLazyGetTasksTestDataQuery,
 } from '@/features/tasks/service';
+import { CreateTask } from '@/features/tasks/create-task/CreateTask.tsx';
 
 export const TasksPage = () => {
   const [showCreateTaskForm, setShowCreateTaskForm] = useState<boolean>(false);
   const [showEditTaskForm, setEditTaskForm] = useState<boolean>(false);
 
   const { data: guid, isSuccess: getGuidSucces } = useGetTenantGuidQuery({});
-  const [getTestTasks, { data, isLoading, isSuccess }] = useLazyGetTasksTestDataQuery(guid);
-  // const [getTasks, { data, isLoading, isSuccess }] = useLazyGetTasksQuery(guid);
-  const [getStatuses, { data: statuses }] = useLazyGetStatusesQuery(guid);
+  const [getTasks, { data: tasksResponse, isLoading, isSuccess }] =
+    useLazyGetTasksTestDataQuery(guid);
   const [getPriorities, { data: priorities }] = useLazyGetPrioritiesQuery(guid);
 
   useEffect(() => {
     if (getGuidSucces) {
-      // getTasks(guid);
-      getTestTasks(guid);
-      getStatuses(guid);
+      getTasks(guid);
       getPriorities(guid);
     }
   }, [getGuidSucces, guid]);
@@ -33,6 +29,7 @@ export const TasksPage = () => {
   const createTaskHandler = () => {
     setShowCreateTaskForm(true);
     console.log('create');
+    console.log(showCreateTaskForm);
     //TODO
   };
   return (
@@ -43,11 +40,16 @@ export const TasksPage = () => {
         </Button>
       </div>
       <TasksList
-        tasks={data?.value}
+        priorities={priorities}
+        tasks={tasksResponse?.value}
         showEditTaskForm={showEditTaskForm}
         showCreateTaskForm={showCreateTaskForm}
         isLoading={isLoading}
         isSuccess={isSuccess}
+      />
+      <CreateTask
+        showCreateTaskForm={showCreateTaskForm}
+        setShowCreateTaskForm={setShowCreateTaskForm}
       />
     </div>
   );

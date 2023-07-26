@@ -22,7 +22,9 @@
 
 .headCell {
   position: relative;
+}
 
+.headCell:not(:first-child):not(:last-child) {
   &:after {
     content: '';
     position: absolute;

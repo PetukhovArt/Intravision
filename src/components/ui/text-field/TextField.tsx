@@ -1,4 +1,4 @@
-import { ReactNode, KeyboardEvent, FC, ComponentProps, useState } from 'react';
+import { ReactNode, KeyboardEvent, FC, ComponentProps, useState, useRef } from 'react';
 
 import * as Label from '@radix-ui/react-label';
 import clsx from 'clsx';
@@ -10,6 +10,8 @@ import EyeIcon from '@/assets/icons/eye-icon.tsx';
 import EyeOffIcon from '@/assets/icons/eye-off-icon.tsx';
 import { Typography } from '@/components/ui/typography/typography.tsx';
 import searchIcon2 from '@/assets/icons/search_icon.png';
+import { Simulate } from 'react-dom/test-utils';
+import select = Simulate.select;
 
 export type TextFieldProps = {
   value?: string;
@@ -50,8 +52,7 @@ export const TextField: FC<TextFieldProps> = ({
     onKeyDown?.(e);
   };
   const classNames = {
-    root: clsx(s.root, className),
-    input: clsx(s.input, showError && s.error),
+    input: clsx(s.input, showError && s.error, className),
     iconButton: clsx(s.iconButton, disabled && s.disabled),
     iconStart: clsx(s.iconStart),
   };
@@ -64,9 +65,15 @@ export const TextField: FC<TextFieldProps> = ({
       setShowPassword(!showPassword);
     }
   };
+  const inputRef = useRef<HTMLInputElement>(null);
+  const handleDoubleClick = () => {
+    inputRef?.current?.select();
+  };
 
   return (
-    <div className={classNames.root}>
+    <div
+    // className={classNames.root}
+    >
       <Label.Root>
         <Typography variant={'body'} color={'inherit'}>
           {label}
@@ -74,6 +81,8 @@ export const TextField: FC<TextFieldProps> = ({
         <div className={s.inputContainer}>
           {iconStart && <span className={s.iconStart}>{iconStart}</span>}
           <input
+            ref={inputRef}
+            onDoubleClick={handleDoubleClick}
             value={value}
             disabled={disabled}
             data-icon={dataIcon}

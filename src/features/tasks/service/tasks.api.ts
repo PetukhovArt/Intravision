@@ -2,11 +2,9 @@ import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
 import {
   GetPrioritiesRes,
   GetStatusesRes,
-  GetTasksParams,
   GetTasksRes,
 } from '@/features/tasks/service/tasks.api.types.ts';
 
-const guidTest = '33ebdca4-a20e-4f25-b7e3-2eb07994619e';
 export const tasksApi = createApi({
   reducerPath: 'tasksApi',
   baseQuery: retry(

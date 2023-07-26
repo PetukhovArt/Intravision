@@ -25,10 +25,8 @@ input {
   top: 50%;
   left: 12px;
   transform: translateY(-50%);
-
   display: grid;
   place-items: center;
-
   color: var(--color-dark-100);
 
   &:has(~ .input:focus) {
@@ -51,18 +49,14 @@ input {
 
 .input {
   cursor: auto;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  width: 100%;
   padding: 6px 40px 6px 12px;
-
+  width: 100%;
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);
   color: var(--color-dark-600);
-
   border-radius: 30px;
   border: 1px solid var(--color-accent-800);
   box-shadow: -1px 0px 7px 0px rgba(0, 0, 0, 0.11) inset;
@@ -80,8 +74,6 @@ input {
 
   &:focus,
   &:active:enabled {
-    //box-shadow: 0 0 0 1px var(--color-light-100);
-
     &::placeholder {
       color: var(--color-dark-100);
     }
@@ -111,16 +103,11 @@ input {
 
 .iconButton {
   all: unset;
-
   cursor: pointer;
-
   position: absolute;
   right: 10px;
-
   display: flex;
-
   border-radius: 100%;
-
   transition: 0.4s;
 
   &:hover {

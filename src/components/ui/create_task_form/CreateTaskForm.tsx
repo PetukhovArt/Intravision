@@ -1,57 +1,57 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import s from 'components/auth/create_task_form/create_task_form.module.scss';
-import { loginSchema } from '@/common/schemas/login-schema.ts';
+import s from './create_task_form.module.scss';
 import { Typography } from '@/components/ui/typography/typography.tsx';
 import { ControlledTextField } from '@/components/ui/controlled/ControlledTextField.tsx';
 import { Button } from '@/components/ui/button/Button.tsx';
+import { createTaskSchema } from '@/common/schemas/create-task-schema.ts';
+import clsx from 'clsx';
 
-export type LoginFormType = z.infer<typeof loginSchema>;
+export type createTaskForm = z.infer<typeof createTaskSchema>;
 
-type LoginFormPropsType = {
-  linkPath: { login: string; forgotPassword: string };
-  onSubmitHandler: (data: LoginFormType) => void;
+type createTaskFormType = {
+  onSubmitHandler: (data: createTaskForm) => void;
 };
-export const CreateTaskForm = (props: LoginFormPropsType) => {
-  const { linkPath, onSubmitHandler } = props;
-
-  const { control, handleSubmit } = useForm<LoginFormType>({
-    resolver: zodResolver(loginSchema),
+export const CreateTaskForm = ({ onSubmitHandler }: createTaskFormType) => {
+  const { control, handleSubmit } = useForm<createTaskForm>({
+    resolver: zodResolver(createTaskSchema),
   });
-  // console.log(errors)
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
     onSubmitHandler(data);
   });
 
+  const classNames = {
+    taskName: clsx(s.task, s.taskName),
+    taskDescription: clsx(s.task, s.taskDescription),
+  };
+
   return (
-    <div className={s.card}>
-      <Typography variant={'body'}>Sign In</Typography>
+    <div className={s.body}>
       <form onSubmit={onSubmit}>
-        <ControlledTextField control={control} name={'email'} label={'Email'} className={s.email} />
+        <Typography variant={'form'} color={'form'} className={s.title}>
+          Название
+        </Typography>
         <ControlledTextField
           control={control}
-          name={'password'}
-          type={'password'}
-          label={'Password'}
-          className={s.password}
+          name={'taskName'}
+          type={'text'}
+          className={classNames.taskName}
+        />
+        <Typography variant={'form'} color={'form'} className={s.title}>
+          Описание
+        </Typography>
+        <ControlledTextField
+          control={control}
+          name={'taskDescription'}
+          type={'text'}
+          className={classNames.taskDescription}
         />
 
-        <Button as={'a'} variant={'link'} href={linkPath.forgotPassword} className={s.link_fogot}>
-          Forgot Password?
-        </Button>
-
-        <Button type='submit' fullWidth className={s.loginBtn}>
-          Sign In
+        <Button type='submit' className={s.saveButton}>
+          Сохранить
         </Button>
       </form>
-      <Typography variant={'body2'} className={s.subtitle}>
-        Do not have an account?
-      </Typography>
-      <Button as={'a'} variant={'link'} className={s.link} href={linkPath.login}>
-        Sign Up
-      </Button>
     </div>
   );
 };

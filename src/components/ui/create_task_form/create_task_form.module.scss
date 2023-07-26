@@ -1,45 +1,32 @@
-.card {
+.body {
   width: 100%;
-  max-width: 420px;
-  padding: 2.05rem 2.25rem 1.2rem;
-  text-align: center;
+  max-width: 625px;
+  text-align: left;
 
-  .email {
-    margin-top: 1.7rem;
+  .title {
+    margin-left: 5px;
+    font-family: var(--font-family-secondary);
+  }
+
+  .task {
+    box-shadow: none;
+    border: 1px solid #f9f9fa;
+    border-radius: 5px;
     text-align: left;
+    margin-top: 5px;
   }
 
-  .password {
-    margin-top: 1.5rem;
-    text-align: left;
+  .taskName {
+    height: 85px;
+    margin-bottom: 17px;
   }
 
-  .remember_lock {
-    display: flex;
-    gap: 0.5rem;
-    align-items: flex-start;
-    margin-top: 1.12rem;
-
-    //padding: 0.375rem 0.625rem 0.375rem 0.375rem;
+  .taskDescription {
+    height: 134px;
+    margin-bottom: 74px;
   }
 
-  .loginBtn {
-    margin-top: 4.13rem;
-  }
-
-  .subtitle {
-    margin-top: 1.25rem;
-    color: var(--color-light-900);
-  }
-
-  .link_fogot {
-    display: flex;
-    justify-content: flex-end;
-    color: var(--light-100);
-  }
-
-  .link {
-    color: var(--color-accent-500);
-    text-decoration: underline;
+  .saveButton {
+    margin-left: 42px;
   }
 }
