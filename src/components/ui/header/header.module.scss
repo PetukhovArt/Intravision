@@ -2,6 +2,10 @@
   grid-area: header;
   background-color: var(--color-accent-200);
   padding: 15px 0 10px 17px;
+  position: sticky;
+  left: 95px;
+  top: 0;
+  z-index: 9999;
 }
 
 .container {

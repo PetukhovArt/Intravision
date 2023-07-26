@@ -3,9 +3,9 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import './styles/index.scss';
 import { Provider } from 'react-redux';
-import { store } from './features/app/store.ts';
 import { RouterProvider } from 'react-router-dom';
-import { router } from './features/app/routes.tsx';
+import { router } from '@/features/app/routes.tsx';
+import { store } from '@/features/app/store.ts';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Provider store={store}>

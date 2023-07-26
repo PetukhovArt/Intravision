@@ -4,8 +4,8 @@ import { z } from 'zod';
 import s from 'components/auth/create_task_form/create_task_form.module.scss';
 import { loginSchema } from '@/common/schemas/login-schema.ts';
 import { Typography } from '@/components/ui/typography/typography.tsx';
-import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field.tsx';
-import { Button } from '@/components/ui/button/button.tsx';
+import { ControlledTextField } from '@/components/ui/controlled/ControlledTextField.tsx';
+import { Button } from '@/components/ui/button/Button.tsx';
 
 export type LoginFormType = z.infer<typeof loginSchema>;
 
@@ -13,7 +13,7 @@ type LoginFormPropsType = {
   linkPath: { login: string; forgotPassword: string };
   onSubmitHandler: (data: LoginFormType) => void;
 };
-export const Create_task_form = (props: LoginFormPropsType) => {
+export const CreateTaskForm = (props: LoginFormPropsType) => {
   const { linkPath, onSubmitHandler } = props;
 
   const { control, handleSubmit } = useForm<LoginFormType>({

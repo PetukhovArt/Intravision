@@ -1,13 +1,13 @@
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from 'react-router-dom';
 
-import { TasksPage } from '@/features/tasks/tasks-page.tsx';
-import { App } from '@/features/app/App.tsx';
-import { Knowledge } from '@/features/knowledge/knowledge.tsx';
-import { Employees } from '@/features/employees/employees.tsx';
-import { Clients } from '@/features/clients/clients.tsx';
-import { CompanyAssets } from '@/features/company-assets/company-assets.tsx';
-import { Settings } from '@/features/settings/settings.tsx';
-import { ErrorPage } from '@/common/error-page/error-page.tsx';
+import { TasksPage } from '@/features/tasks/TasksPage.tsx';
+import { Knowledge } from '@/features/knowledge/Knowledge.tsx';
+import { Employees } from '@/features/employees/Employees.tsx';
+import { Clients } from '@/features/clients/Clients.tsx';
+import { CompanyAssets } from '@/features/company-assets/CompanyAssets.tsx';
+import { Settings } from '@/features/settings/Settings.tsx';
+import { ErrorPage } from '@/common/error-page/ErrorPage.tsx';
+import App from '@/features/app/App.tsx';
 
 export enum RouteNames {
   START_PAGE = '/',

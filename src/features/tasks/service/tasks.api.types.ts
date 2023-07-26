@@ -38,3 +38,15 @@ export type GetTasksParams = {
   $top?: number;
   $skip?: number;
 };
+export type GetStatusesRes = StatusType[];
+export type StatusType = {
+  rgb: string;
+  id: number;
+  name: string;
+};
+export type GetPrioritiesRes = PriorityType[];
+export type PriorityType = {
+  rgb: string;
+  id: number;
+  name: string;
+};

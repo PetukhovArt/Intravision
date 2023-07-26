@@ -1,5 +1,5 @@
 import s from './header.module.scss';
-import { TextField } from '@/components/ui/text-field/text-field.tsx';
+import { TextField } from '@/components/ui/text-field/TextField.tsx';
 
 export const Header = () => {
   return (

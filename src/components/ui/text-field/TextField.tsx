@@ -8,7 +8,6 @@ import s from './text-field.module.scss';
 import CloseIcon from '@/assets/icons/close-icon.tsx';
 import EyeIcon from '@/assets/icons/eye-icon.tsx';
 import EyeOffIcon from '@/assets/icons/eye-off-icon.tsx';
-// import SearchIcon from '@/assets/icons/search-icon.tsx';
 import { Typography } from '@/components/ui/typography/typography.tsx';
 import searchIcon2 from '@/assets/icons/search_icon.png';
 

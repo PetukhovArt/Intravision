@@ -10,6 +10,10 @@
   @include typography($fs: var(--font-size-xs));
 }
 
+.status {
+  @include typography($fs: var(--font-size-xs), $lh: var(--line-height-xs));
+}
+
 .error {
   @include typography($fs: var(--font-size-xs), $lh: var(--line-height-m));
 }
@@ -20,6 +24,7 @@
 }
 
 .secondary {
+  color: var(--color-dark-600);
 }
 
 .error {

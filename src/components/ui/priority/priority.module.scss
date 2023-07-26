@@ -1,0 +1,8 @@
+.root {
+  background-color: red;
+}
+
+.root[data-orientation='vertical'] {
+  height: 50px;
+  width: 5px;
+}

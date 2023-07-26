@@ -1,5 +1,10 @@
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
-import { GetTasksParams, GetTasksRes } from '@/features/tasks/service/tasks.api.types.ts';
+import {
+  GetPrioritiesRes,
+  GetStatusesRes,
+  GetTasksParams,
+  GetTasksRes,
+} from '@/features/tasks/service/tasks.api.types.ts';
 
 const guidTest = '33ebdca4-a20e-4f25-b7e3-2eb07994619e';
 export const tasksApi = createApi({
@@ -8,7 +13,7 @@ export const tasksApi = createApi({
     fetchBaseQuery({
       baseUrl: 'http://intravision-task.test01.intravision.ru/',
     }),
-    // { maxRetries: 2 },
+    { maxRetries: 0 },
   ),
   tagTypes: ['Task'],
   refetchOnFocus: true,
@@ -17,23 +22,64 @@ export const tasksApi = createApi({
 
   endpoints: (build) => {
     return {
-      getTasks: build.query<GetTasksRes, GetTasksParams>({
-        query: ({ guid }) => {
+      getTasks: build.query<GetTasksRes, string>({
+        query: (arg) => {
+          return {
+            method: 'GET',
+            url: `api/${arg}/Tasks`,
+          };
+        },
+      }),
+      getPriorities: build.query<GetPrioritiesRes, string>({
+        query: (arg) => {
+          return {
+            method: 'GET',
+            url: `api/${arg}/Priorities`,
+          };
+        },
+      }),
+      getTenantGuid: build.query({
+        query: () => {
+          return {
+            method: 'GET',
+            url: `api/Tenants`,
+          };
+        },
+      }),
+      getTasksTestData: build.query<GetTasksRes, string>({
+        query: (arg) => {
           return {
             method: 'GET',
             url: 'odata/tasks',
             params: {
-              tenantguid: guidTest,
+              tenantguid: arg,
             },
           };
         },
         providesTags: ['Task'],
       }),
+      getStatuses: build.query<GetStatusesRes, string>({
+        query: (arg) => {
+          return {
+            method: 'GET',
+            url: `api/${arg}/Statuses`,
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useGetTasksQuery } = tasksApi;
+export const {
+  useLazyGetPrioritiesQuery,
+  useLazyGetStatusesQuery,
+  useGetTasksTestDataQuery,
+  useGetStatusesQuery,
+  useLazyGetTasksTestDataQuery,
+  useGetTenantGuidQuery,
+  useGetTasksQuery,
+  useLazyGetTasksQuery,
+} = tasksApi;
 
 // addCard: build.mutation<AddCardResponseType, ArgCreateCardType>({
 //   query: card => {
