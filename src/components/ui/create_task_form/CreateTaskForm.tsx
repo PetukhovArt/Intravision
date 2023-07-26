@@ -1,24 +1,23 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import s from './create_task_form.module.scss';
-import { Typography } from '@/components/ui/typography/typography.tsx';
-import { ControlledTextField } from '@/components/ui/controlled/ControlledTextField.tsx';
 import { Button } from '@/components/ui/button/Button.tsx';
-import { createTaskSchema } from '@/common/schemas/create-task-schema.ts';
 import clsx from 'clsx';
+import { Typography } from '@/components/ui/typography/typography.tsx';
+import { useLazyAddTaskQuery } from '@/features/tasks/service';
 
-export type createTaskForm = z.infer<typeof createTaskSchema>;
-
-type createTaskFormType = {
-  onSubmitHandler: (data: createTaskForm) => void;
+type formProps = {
+  guid: string;
 };
-export const CreateTaskForm = ({ onSubmitHandler }: createTaskFormType) => {
-  const { control, handleSubmit } = useForm<createTaskForm>({
-    resolver: zodResolver(createTaskSchema),
-  });
+export const CreateTaskForm = ({ guid }: formProps) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const [addTask, { data: taskAdded }] = useLazyAddTaskQuery({});
   const onSubmit = handleSubmit((data) => {
-    onSubmitHandler(data);
+    addTask(guid);
   });
 
   const classNames = {
@@ -32,21 +31,20 @@ export const CreateTaskForm = ({ onSubmitHandler }: createTaskFormType) => {
         <Typography variant={'form'} color={'form'} className={s.title}>
           Название
         </Typography>
-        <ControlledTextField
-          control={control}
-          name={'taskName'}
-          type={'text'}
-          className={classNames.taskName}
-        />
-        <Typography variant={'form'} color={'form'} className={s.title}>
-          Описание
-        </Typography>
-        <ControlledTextField
-          control={control}
-          name={'taskDescription'}
-          type={'text'}
-          className={classNames.taskDescription}
-        />
+
+        <textarea {...register('name', { required: true })} className={classNames.taskName} />
+        {errors.name && <Typography variant={'error'}>This field is required</Typography>}
+
+        <div className={s.descriptionBlock}>
+          <Typography variant={'form'} color={'form'} className={s.title}>
+            Описание
+          </Typography>
+          <textarea
+            {...register('description', { required: true })}
+            className={classNames.taskDescription}
+          />
+          {errors.description && <Typography variant={'error'}>This field is required</Typography>}
+        </div>
 
         <Button type='submit' className={s.saveButton}>
           Сохранить

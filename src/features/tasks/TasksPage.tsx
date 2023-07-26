@@ -5,6 +5,7 @@ import { TasksList } from '@/features/tasks/tasks-list/TasksList.tsx';
 import { useEffect, useState } from 'react';
 import {
   useGetTenantGuidQuery,
+  useLazyAddTaskQuery,
   useLazyGetPrioritiesQuery,
   useLazyGetTasksTestDataQuery,
 } from '@/features/tasks/service';
@@ -48,6 +49,7 @@ export const TasksPage = () => {
         isSuccess={isSuccess}
       />
       <CreateTask
+        guid={guid}
         showCreateTaskForm={showCreateTaskForm}
         setShowCreateTaskForm={setShowCreateTaskForm}
       />

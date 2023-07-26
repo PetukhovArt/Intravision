@@ -28,6 +28,29 @@ export const tasksApi = createApi({
           };
         },
       }),
+      addTask: build.query<GetTasksRes, string>({
+        query: (arg) => {
+          return {
+            method: 'POST',
+            url: `api/${arg}/Tasks`,
+            body: {
+              name: 'test1',
+              description: 'test1111',
+              comment: 'test request',
+              price: 0,
+              taskTypeId: 0,
+              statusId: 0,
+              priorityId: 0,
+              serviceId: 0,
+              resolutionDatePlan: '2023-07-26T21:50:56.560Z',
+              tags: [],
+              initiatorId: 0,
+              executorId: 0,
+              executorGroupId: 0,
+            },
+          };
+        },
+      }),
       getPriorities: build.query<GetPrioritiesRes, string>({
         query: (arg) => {
           return {
@@ -69,6 +92,7 @@ export const tasksApi = createApi({
 });
 
 export const {
+  useLazyAddTaskQuery,
   useLazyGetPrioritiesQuery,
   useLazyGetStatusesQuery,
   useGetTasksTestDataQuery,

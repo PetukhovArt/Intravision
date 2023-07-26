@@ -10,8 +10,6 @@ import EyeIcon from '@/assets/icons/eye-icon.tsx';
 import EyeOffIcon from '@/assets/icons/eye-off-icon.tsx';
 import { Typography } from '@/components/ui/typography/typography.tsx';
 import searchIcon2 from '@/assets/icons/search_icon.png';
-import { Simulate } from 'react-dom/test-utils';
-import select = Simulate.select;
 
 export type TextFieldProps = {
   value?: string;
@@ -108,7 +106,7 @@ export const TextField: FC<TextFieldProps> = ({
         </div>
       </Label.Root>
       {showError && (
-        <Typography variant={'error'} color={'error'}>
+        <Typography variant={'error'} color={'error'} className={s.errorElement}>
           {errorMessage}
         </Typography>
       )}

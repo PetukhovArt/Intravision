@@ -9,8 +9,11 @@
   }
 
   .task {
+    padding: 10px;
+    resize: none;
+    width: 625px;
     box-shadow: none;
-    border: 1px solid #f9f9fa;
+    border: 1px solid #e8e8e8;
     border-radius: 5px;
     text-align: left;
     margin-top: 5px;
@@ -18,15 +21,18 @@
 
   .taskName {
     height: 85px;
-    margin-bottom: 17px;
+  }
+
+  .descriptionBlock {
+    margin-top: 17px;
   }
 
   .taskDescription {
     height: 134px;
-    margin-bottom: 74px;
   }
 
   .saveButton {
+    margin-top: 74px;
     margin-left: 42px;
   }
 }

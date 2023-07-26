@@ -2,16 +2,19 @@ import s from './create-task.module.scss';
 import { CreateTaskForm } from '@/components/ui/create_task_form/CreateTaskForm.tsx';
 import { Typography } from '@/components/ui/typography/typography.tsx';
 import clsx from 'clsx';
+import { useLazyAddTaskQuery } from '@/features/tasks/service';
 
 type CreateTaskProps = {
   showCreateTaskForm: boolean;
   setShowCreateTaskForm: (value: boolean) => void;
+  guid: string;
 };
 
-export const CreateTask = ({ showCreateTaskForm, setShowCreateTaskForm }: CreateTaskProps) => {
-  const onSaveTaskHandler = () => {
-    setShowCreateTaskForm(false);
-  };
+export const CreateTask = ({
+  guid,
+  showCreateTaskForm,
+  setShowCreateTaskForm,
+}: CreateTaskProps) => {
   const classNames = {
     root: clsx(s.createTask, !showCreateTaskForm && s.hidden),
   };
@@ -22,7 +25,7 @@ export const CreateTask = ({ showCreateTaskForm, setShowCreateTaskForm }: Create
         <Typography className={s.title}>Новая заявка</Typography>
       </div>
       <div className={s.main}>
-        <CreateTaskForm onSubmitHandler={onSaveTaskHandler} />
+        <CreateTaskForm guid={guid} />
       </div>
     </div>
   );
