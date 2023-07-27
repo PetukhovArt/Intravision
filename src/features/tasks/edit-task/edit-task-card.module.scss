@@ -1,0 +1,74 @@
+@import 'src/styles/mixins';
+
+.hidden {
+  transform: translateX(100%);
+}
+
+.visible {
+  transition: transform 0.5s ease-out;
+  transform: translateX(0);
+}
+
+.createTask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 975px;
+  height: calc(100vh - 65px);
+  background-color: #ecf3f7;
+
+  .contentWrapper {
+    padding-left: 37px;
+    height: 100%;
+  }
+
+  .header {
+    @include flex-block($flex-direction: row, $justify-content: space-between);
+    padding: 0 31px 0 37px;
+    height: 60px;
+    background-color: #1a4876;
+
+    .text {
+      @include flex-block($flex-direction: row);
+    }
+
+    .iconButton {
+      all: unset;
+      height: 30px;
+      width: 30px;
+      cursor: pointer;
+      @include flex-block;
+
+      &:hover {
+        background-color: var(--color-dark-500);
+        border-radius: 100%;
+      }
+    }
+
+    .title {
+      height: 20px;
+      overflow: hidden;
+      color: #fff;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+    }
+
+    .name {
+      margin-left: 30px;
+      color: white;
+      width: 590px;
+      font-size: 16px;
+      font-weight: 400;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
+  }
+
+  .content {
+    height: 100%;
+  }
+}

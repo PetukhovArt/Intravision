@@ -12,11 +12,8 @@ import { Navbar } from '@/components/ui/navbar/navbar.tsx';
 
 function App() {
   // const { data: guid, isSuccess: getGuidSucces } = useGetTenantGuidQuery({});
-  //
   // const [getPriorities, { data: priorities }] = useLazyGetPrioritiesQuery(guid);
-  //
-  // const [getStatuses, { data: statuses }] = useLazyGetStatusesQuery(guid);
-  //
+
   // const [getTestTasks, { data: testTasks }] = useLazyGetTasksTestDataQuery(guid);
   //
   // useEffect(() => {

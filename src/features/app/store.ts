@@ -1,6 +1,6 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { tasksApi } from '../tasks/service/tasks.api.ts';
+import { tasksApi } from '@/features/tasks/service';
 
 export const store = configureStore({
   reducer: {

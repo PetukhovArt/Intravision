@@ -4,22 +4,27 @@
 
 .body {
   @include typography($fs: var(--font-size-m));
+  cursor: default;
 }
 
 .body2 {
   @include typography($fs: var(--font-size-xs));
+  cursor: default;
 }
 
 .status {
   @include typography($fs: var(--font-size-xs), $lh: var(--line-height-xs));
+  cursor: default;
 }
 
 .error {
   @include typography($fs: var(--font-size-xs), $lh: var(--line-height-m));
+  cursor: default;
 }
 
 .form {
   @include typography($fs: var(--font-size-s), $lh: var(--line-height-m));
+  cursor: default;
 }
 
 //colors ================================================================================
@@ -36,5 +41,5 @@
 }
 
 .form {
-  color: var(--color-dark-300);
+  color: var(--color-dark-500);
 }

@@ -30,6 +30,7 @@ type ConditionalProps<T> = {
 
 interface CommonProps {
   value: string | number;
+  // value: string;
   className?: string;
   errorMessage?: string;
   width?: CSSProperties['width'];
@@ -94,8 +95,8 @@ export const SuperSelect = <T extends string | number>({
             </SelectScrollUpButton>
             <SelectViewport>
               {options.map((el, index) => (
-                <>
-                  <SelectItem value={el?.toString()} className={s.option} key={index}>
+                <div key={index}>
+                  <SelectItem value={el?.toString()} className={s.option}>
                     <SelectItemText>
                       <Typography variant={'body'}>{el?.toString()}</Typography>
                     </SelectItemText>
@@ -104,7 +105,7 @@ export const SuperSelect = <T extends string | number>({
                     </SelectItemIndicator>
                   </SelectItem>
                   {showOptionSeparator && <SelectSeparator className={s.separator} />}
-                </>
+                </div>
               ))}
             </SelectViewport>
             <SelectScrollDownButton className={s.scrollButton}>

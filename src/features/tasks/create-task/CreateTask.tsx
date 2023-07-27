@@ -1,8 +1,8 @@
 import s from './create-task.module.scss';
 import { CreateTaskForm } from '@/components/ui/create_task_form/CreateTaskForm.tsx';
 import { Typography } from '@/components/ui/typography/typography.tsx';
+import closeIcon from '@/assets/icons/close.png';
 import clsx from 'clsx';
-import { useLazyAddTaskQuery } from '@/features/tasks/service';
 
 type CreateTaskProps = {
   showCreateTaskForm: boolean;
@@ -18,14 +18,22 @@ export const CreateTask = ({
   const classNames = {
     root: clsx(s.createTask, !showCreateTaskForm && s.hidden),
   };
+  const onCloseFormHandler = () => {
+    setShowCreateTaskForm(false);
+  };
 
   return (
     <div className={classNames.root}>
       <div className={s.header}>
-        <Typography className={s.title}>Новая заявка</Typography>
+        <div>
+          <Typography className={s.title}>Новая заявка</Typography>
+        </div>
+        <button className={s.IconButton} onClick={onCloseFormHandler}>
+          <img src={closeIcon} alt='close' />
+        </button>
       </div>
       <div className={s.main}>
-        <CreateTaskForm guid={guid} />
+        <CreateTaskForm guid={guid} setShowCreateTaskForm={setShowCreateTaskForm} />
       </div>
     </div>
   );

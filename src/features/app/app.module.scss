@@ -2,7 +2,7 @@
   display: grid;
   margin: 0 auto;
   max-width: 1600px;
-  //overflow: hidden;
+  overflow: hidden;
   grid-template-areas:
     'navbar header'
     'navbar content';

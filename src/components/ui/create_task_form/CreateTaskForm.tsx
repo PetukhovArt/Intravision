@@ -1,24 +1,35 @@
-import { useForm } from 'react-hook-form';
-import s from './create_task_form.module.scss';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import s from './create-task-form.module.scss';
 import { Button } from '@/components/ui/button/Button.tsx';
 import clsx from 'clsx';
 import { Typography } from '@/components/ui/typography/typography.tsx';
-import { useLazyAddTaskQuery } from '@/features/tasks/service';
+import { useAddTaskMutation } from '@/features/tasks/service';
 
 type formProps = {
   guid: string;
+  setShowCreateTaskForm: (value: boolean) => void;
 };
-export const CreateTaskForm = ({ guid }: formProps) => {
+type formData = {
+  name: string;
+  description: string;
+};
+export const CreateTaskForm = ({ guid, setShowCreateTaskForm }: formProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<formData>();
 
-  const [addTask, { data: taskAdded }] = useLazyAddTaskQuery({});
-  const onSubmit = handleSubmit((data) => {
-    addTask(guid);
-  });
+  const [addTask] = useAddTaskMutation({});
+
+  const onSubmit: SubmitHandler<formData> = async (data: FieldValues) => {
+    try {
+      await addTask({ guid, name: data.name, description: data.description });
+      setShowCreateTaskForm(false);
+    } catch (e) {
+      console.error(e); //TODO error handling
+    }
+  };
 
   const classNames = {
     taskName: clsx(s.task, s.taskName),
@@ -27,7 +38,7 @@ export const CreateTaskForm = ({ guid }: formProps) => {
 
   return (
     <div className={s.body}>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Typography variant={'form'} color={'form'} className={s.title}>
           Название
         </Typography>

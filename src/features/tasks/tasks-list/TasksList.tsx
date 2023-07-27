@@ -3,24 +3,17 @@ import { useMemo } from 'react';
 import { MaterialReactTable, MRT_ColumnDef } from 'material-react-table';
 import { PriorityIndicator } from '@/features/tasks/priority-indicator/PriorityIndicator.tsx';
 import { Typography } from '@/components/ui/typography/typography.tsx';
-import { GetPrioritiesRes, TaskType } from '@/features/tasks/service';
+import { GetPrioritiesRes, TaskBasicInfo, TaskType } from '@/features/tasks/service';
 
 type TasksListPropsType = {
   priorities: GetPrioritiesRes | undefined;
   tasks: TaskType[] | undefined;
-  showEditTaskForm: boolean;
-  showCreateTaskForm: boolean;
-  isLoading?: boolean;
-  isSuccess?: boolean;
+  handleUpdateTaskOpen: (data: TaskBasicInfo) => void;
 };
-export const TasksList = ({ tasks, priorities }: TasksListPropsType) => {
-  // const [data, setData] = useState<TaskType[] | null>(null);
-  //
-  // useEffect(() => {
-  //   if (tasks) {
-  //     setData(tasks);
-  //   }
-  // }, [isSuccess]);
+export const TasksList = ({ tasks, priorities, handleUpdateTaskOpen }: TasksListPropsType) => {
+  const updateTaskHandler = (task: TaskType) => {
+    handleUpdateTaskOpen(task);
+  };
 
   const columns = useMemo<MRT_ColumnDef<TaskType>[]>(
     () => [
@@ -40,6 +33,7 @@ export const TasksList = ({ tasks, priorities }: TasksListPropsType) => {
       {
         accessorKey: 'name',
         header: 'Название',
+        Cell: ({ row }) => <span className={s.rowName}>{row.original.name}</span>,
         maxSize: 418,
         size: 418,
       },
@@ -62,10 +56,6 @@ export const TasksList = ({ tasks, priorities }: TasksListPropsType) => {
     [tasks],
   );
 
-  const openTaskHandler = (id: string) => {
-    console.log({ id });
-  };
-
   if (!tasks) {
     return null;
   } else
@@ -83,7 +73,7 @@ export const TasksList = ({ tasks, priorities }: TasksListPropsType) => {
           enableTopToolbar={false}
           muiTableBodyRowProps={({ row }) => ({
             onClick: () => {
-              openTaskHandler(row._valuesCache.id);
+              updateTaskHandler(row.original);
             },
             className: s.bodyRow,
           })}
