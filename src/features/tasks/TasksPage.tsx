@@ -37,10 +37,10 @@ export const TasksPage = () => {
   });
 
   const { data: guid } = useGetTenantGuidQuery({});
-  const { data: tasks } = useGetTasksTestDataQuery(guid);
-  const { data: priorities } = useGetPrioritiesQuery(guid);
-  const { data: statuses } = useGetStatusesQuery(guid);
-  const { data: executors } = useGetExecutorsQuery(guid);
+  const { data: tasks } = useGetTasksTestDataQuery(guid, { skip: !guid });
+  const { data: priorities } = useGetPrioritiesQuery(guid, { skip: !guid });
+  const { data: statuses } = useGetStatusesQuery(guid, { skip: !guid });
+  const { data: executors } = useGetExecutorsQuery(guid, { skip: !guid });
 
   const createTaskHandler = () => {
     setShowEditTaskForm(false);

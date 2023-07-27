@@ -25,15 +25,15 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-table": "^8.9.3",
     "clsx": "^2.0.0",
+    "gh": "^2.8.9",
+    "gh-pages": "^5.0.0",
     "material-react-table": "^1.14.0",
     "myriad-font": "^0.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.2",
     "react-redux": "^8.1.1",
-    "react-router-dom": "^6.14.2",
-    "vite-plugin-live-reload": "^3.0.2",
-    "zod": "^3.21.4"
+    "react-router-dom": "^6.14.2"
   },
   "devDependencies": {
     "@types/node": "^20.4.4",
