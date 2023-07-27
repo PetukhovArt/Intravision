@@ -1,5 +1,5 @@
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import s from './create-task-form.module.scss';
+import s from 'src/features/tasks/create_task_form/create-task-form.module.scss';
 import { Button } from '@/components/ui/button/Button.tsx';
 import clsx from 'clsx';
 import { Typography } from '@/components/ui/typography/typography.tsx';

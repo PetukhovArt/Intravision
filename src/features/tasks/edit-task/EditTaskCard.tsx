@@ -1,7 +1,7 @@
 import s from './edit-task-card.module.scss';
 import { Typography } from '@/components/ui/typography/typography.tsx';
 import clsx from 'clsx';
-import { EditTaskForm } from '@/components/ui/edit_task_form/EditTaskForm.tsx';
+import { EditTaskForm } from '@/features/tasks/edit_task_form/EditTaskForm.tsx';
 import closeIcon from '@/assets/icons/close.png';
 import {
   ExecutorType,

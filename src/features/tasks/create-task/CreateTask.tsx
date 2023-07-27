@@ -1,5 +1,5 @@
 import s from './create-task.module.scss';
-import { CreateTaskForm } from '@/components/ui/create_task_form/CreateTaskForm.tsx';
+import { CreateTaskForm } from '@/features/tasks/create_task_form/CreateTaskForm.tsx';
 import { Typography } from '@/components/ui/typography/typography.tsx';
 import closeIcon from '@/assets/icons/close.png';
 import clsx from 'clsx';
