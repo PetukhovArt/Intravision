@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
 import {
   AddTaskArgsType,
+  ExecutorType,
   GetPrioritiesRes,
   GetStatusesRes,
   getTaskByIdArgsType,
@@ -40,6 +41,7 @@ export const tasksApi = createApi({
             url: `api/${guid}/Tasks/${taskId}`,
           };
         },
+        providesTags: ['Task'],
       }),
       addTask: build.mutation<number, AddTaskArgsType>({
         query: ({ guid, name, description }) => {
@@ -93,7 +95,7 @@ export const tasksApi = createApi({
           };
         },
       }),
-      getExecutors: build.query<any, string>({
+      getExecutors: build.query<ExecutorType[], string>({
         query: (arg) => {
           return {
             method: 'GET',
@@ -106,13 +108,10 @@ export const tasksApi = createApi({
 });
 
 export const {
+  useGetTaskByIdQuery,
   useGetTenantGuidQuery,
   useUpdateTaskMutation,
   useAddTaskMutation,
-  // useLazyGetPrioritiesQuery,
-  // useLazyGetStatusesQuery,
-  // useLazyGetTasksTestDataQuery,
-  // useLazyGetExecutorsQuery,
   useGetStatusesQuery,
   useGetPrioritiesQuery,
   useGetTasksTestDataQuery,

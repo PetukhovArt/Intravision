@@ -1,5 +1,5 @@
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import s from 'src/features/tasks/create_task_form/create-task-form.module.scss';
+import s from './create-task-form.module.scss';
 import { Button } from '@/components/ui/button/Button.tsx';
 import clsx from 'clsx';
 import { Typography } from '@/components/ui/typography/typography.tsx';
@@ -8,14 +8,16 @@ import { useAddTaskMutation } from '@/features/tasks/service';
 type formProps = {
   guid: string;
   setShowCreateTaskForm: (value: boolean) => void;
+  setShowEditTaskForm: (value: boolean) => void;
 };
 type formData = {
   name: string;
   description: string;
 };
-export const CreateTaskForm = ({ guid, setShowCreateTaskForm }: formProps) => {
+export const CreateTaskForm = ({ setShowEditTaskForm, guid, setShowCreateTaskForm }: formProps) => {
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<formData>();
@@ -23,12 +25,10 @@ export const CreateTaskForm = ({ guid, setShowCreateTaskForm }: formProps) => {
   const [addTask] = useAddTaskMutation({});
 
   const onSubmit: SubmitHandler<formData> = async (data: FieldValues) => {
-    try {
-      await addTask({ guid, name: data.name, description: data.description });
-      setShowCreateTaskForm(false);
-    } catch (e) {
-      console.error(e); //TODO error handling
-    }
+    addTask({ guid, name: data.name, description: data.description });
+    reset();
+    setShowCreateTaskForm(false);
+    setShowEditTaskForm(true);
   };
 
   const classNames = {

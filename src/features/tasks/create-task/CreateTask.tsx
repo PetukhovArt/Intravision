@@ -7,16 +7,18 @@ import clsx from 'clsx';
 type CreateTaskProps = {
   showCreateTaskForm: boolean;
   setShowCreateTaskForm: (value: boolean) => void;
+  setShowEditTaskForm: (value: boolean) => void;
   guid: string;
 };
 
 export const CreateTask = ({
   guid,
+  setShowEditTaskForm,
   showCreateTaskForm,
   setShowCreateTaskForm,
 }: CreateTaskProps) => {
   const classNames = {
-    root: clsx(s.createTask, !showCreateTaskForm && s.hidden),
+    root: clsx(s.createTask, !showCreateTaskForm && s.cardHidden),
   };
   const onCloseFormHandler = () => {
     setShowCreateTaskForm(false);
@@ -33,7 +35,11 @@ export const CreateTask = ({
         </button>
       </div>
       <div className={s.main}>
-        <CreateTaskForm guid={guid} setShowCreateTaskForm={setShowCreateTaskForm} />
+        <CreateTaskForm
+          guid={guid}
+          setShowCreateTaskForm={setShowCreateTaskForm}
+          setShowEditTaskForm={setShowEditTaskForm}
+        />
       </div>
     </div>
   );

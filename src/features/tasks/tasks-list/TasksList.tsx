@@ -3,16 +3,24 @@ import { useMemo } from 'react';
 import { MaterialReactTable, MRT_ColumnDef } from 'material-react-table';
 import { PriorityIndicator } from '@/features/tasks/priority-indicator/PriorityIndicator.tsx';
 import { Typography } from '@/components/ui/typography/typography.tsx';
-import { GetPrioritiesRes, TaskBasicInfo, TaskType } from '@/features/tasks/service';
+import {
+  GetPrioritiesRes,
+  TaskType,
+  useGetTasksTestDataQuery,
+  useGetTenantGuidQuery,
+} from '@/features/tasks/service';
 
 type TasksListPropsType = {
   priorities: GetPrioritiesRes | undefined;
   tasks: TaskType[] | undefined;
-  handleUpdateTaskOpen: (data: TaskBasicInfo) => void;
+  handleUpdateTaskOpen: (id: number) => void;
 };
-export const TasksList = ({ tasks, priorities, handleUpdateTaskOpen }: TasksListPropsType) => {
-  const updateTaskHandler = (task: TaskType) => {
-    handleUpdateTaskOpen(task);
+export const TasksList = ({ priorities, handleUpdateTaskOpen }: TasksListPropsType) => {
+  const { data: guid } = useGetTenantGuidQuery({});
+  const { data: tasks, isSuccess } = useGetTasksTestDataQuery(guid, { skip: !guid });
+
+  const updateTaskHandler = (taskId: number) => {
+    handleUpdateTaskOpen(taskId);
   };
 
   const columns = useMemo<MRT_ColumnDef<TaskType>[]>(
@@ -56,26 +64,25 @@ export const TasksList = ({ tasks, priorities, handleUpdateTaskOpen }: TasksList
     [tasks],
   );
 
-  if (!tasks) {
-    return null;
+  if (!isSuccess) {
+    return <></>;
   } else
     return (
-      <div className={s.tasksList}>
+      <div className={s.tasksList} style={{ height: '100vh', overflow: 'auto' }}>
         <MaterialReactTable
+          // enableStickyHeader={true}
           enableSorting={false}
           layoutMode='grid'
           columns={columns}
-          data={tasks}
+          data={tasks.value}
           enableColumnActions={false}
           enableColumnFilters={false}
           enablePagination={false}
           enableBottomToolbar={false}
           enableTopToolbar={false}
           muiTableBodyRowProps={({ row }) => ({
-            onClick: () => {
-              updateTaskHandler(row.original);
-            },
             className: s.bodyRow,
+            onClick: () => updateTaskHandler(row.original.id),
           })}
           muiTableHeadCellProps={{ className: s.headCell }}
           muiTablePaperProps={{ sx: { boxShadow: 'none' } }}

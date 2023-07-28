@@ -1,6 +1,6 @@
 @import 'src/styles/mixins';
 
-.hidden {
+.cardHidden {
   transform: translateX(100%);
 }
 
@@ -10,6 +10,7 @@
 }
 
 .createTask {
+  z-index: 9999;
   position: absolute;
   top: 0;
   right: 0;

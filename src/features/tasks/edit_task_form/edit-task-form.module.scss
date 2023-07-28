@@ -5,9 +5,6 @@
   height: 100%;
   text-align: left;
 
-  .form {
-  }
-
   .description {
     margin-bottom: 55px;
     width: 681px;
@@ -19,7 +16,7 @@
     line-height: 18px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 5;
     overflow: hidden;
   }
 
@@ -27,7 +24,7 @@
     padding-left: 30px;
     padding-top: 23px;
     width: 735px;
-    height: 100vh;
+    //height: 100vh;
     border-right: 1px solid #d7dce0;
 
     .titleDescription {
@@ -91,9 +88,70 @@
 
   .saveButton {
     margin-left: 42px;
+    margin-bottom: 59px;
+  }
+
+  .commentsBlock {
+    padding-left: 82px;
+    position: relative;
+
+    .commentHeader {
+      .nameComment {
+        margin-top: 20px;
+        color: #525460;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: normal;
+      }
+
+      .commentDate {
+        margin-top: 10px;
+        color: #63677c;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: normal;
+      }
+
+      .commentCircle {
+        background-color: #c5cdd3;
+        position: absolute;
+        left: 30px;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+    }
+
+    .commentItems {
+      margin-top: 15px;
+
+      .commentItem {
+        width: 620px;
+        padding: 10px 63px 21px 10px;
+        background-color: #e3e9f4;
+        filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.2));
+
+        .commentText {
+          color: #060606;
+          font-size: 14px;
+          font-weight: 300;
+          line-height: 18px;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 4;
+          overflow: hidden;
+        }
+      }
+    }
   }
 
   .sideBar {
+    button {
+      font-size: 14px;
+      color: #525460;
+    }
+
     padding: 0 28px;
     position: absolute;
     top: 60px;
@@ -137,41 +195,25 @@
       margin-bottom: 42px;
     }
 
-    .created {
+    .dataItem {
       margin-bottom: 22px;
     }
 
-    .executor {
-      margin-bottom: 22px;
+    .calendarImage {
+      width: 18px;
+      height: 15px;
     }
 
-    .priority {
-      margin-bottom: 22px;
-    }
+    .dateBlock {
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
 
-    .priority {
-      margin-bottom: 22px;
-    }
-
-    .dateWrapper {
-      margin-bottom: 22px;
-
-      .calendarImage {
-        width: 18px;
-        height: 15px;
-      }
-
-      .dateBlock {
-        margin-top: 5px;
+      .date {
+        margin-left: 7px;
         display: flex;
         align-items: center;
-
-        .date {
-          margin-left: 7px;
-          display: flex;
-          align-items: center;
-          line-height: normal;
-        }
+        line-height: normal;
       }
     }
 
@@ -182,10 +224,11 @@
 
       .tag {
         all: unset;
+        height: 20px;
+        background-color: #ffffff;
         display: block;
-        cursor: pointer;
         margin-bottom: 5px;
-        padding: 3px 10px;
+        padding: 0 10px;
         color: #9da1aa;
         font-size: 12px;
         font-weight: 300;

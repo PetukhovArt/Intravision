@@ -95,7 +95,17 @@ export type GetTaskByIdRes = {
   executorName: string;
   executorGroupId: number;
   executorGroupName: string;
-  lifetimeItems: any[];
+  lifetimeItems: lifetimeItem[];
+};
+export type lifetimeItem = {
+  comment: string;
+  createdAt: string;
+  fieldName: any;
+  id: number;
+  lifetimeType: number;
+  newFieldValue: any;
+  oldFieldValue: any;
+  userName: string;
 };
 
 export type AddTaskArgsType = {
@@ -104,11 +114,11 @@ export type AddTaskArgsType = {
   description: string;
 };
 export type UpdateTaskArgsType = {
-  taskId: number | null;
+  taskId: number | undefined;
   guid: string;
-  comment?: string | null;
-  statusId: number | null;
-  executorId: number | null;
+  comment?: string | undefined;
+  statusId: number | undefined;
+  executorId: number | undefined;
 };
 export type ExecutorsType = ExecutorType[];
 export type ExecutorType = {

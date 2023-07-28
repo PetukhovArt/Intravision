@@ -3,67 +3,42 @@ import { Typography } from '@/components/ui/typography/typography.tsx';
 import clsx from 'clsx';
 import { EditTaskForm } from '@/features/tasks/edit_task_form/EditTaskForm.tsx';
 import closeIcon from '@/assets/icons/close.png';
-import {
-  ExecutorType,
-  StatusType,
-  TaskBasicInfo,
-  useUpdateTaskMutation,
-} from '@/features/tasks/service';
+import { useGetTaskByIdQuery, useGetTenantGuidQuery } from '@/features/tasks/service';
 
 type EditTaskProps = {
-  taskData: TaskBasicInfo;
-  statuses: StatusType[] | undefined;
-  executors: ExecutorType[] | undefined;
+  taskId: number;
   showEditTaskForm: boolean;
   setShowEditTaskForm: (value: boolean) => void;
-  guid: string;
 };
 
-export const EditTaskCard = ({
-  guid,
-  taskData,
-  showEditTaskForm,
-  setShowEditTaskForm,
-  statuses,
-  executors,
-}: EditTaskProps) => {
-  const classNames = {
-    root: clsx(s.createTask, !showEditTaskForm && s.hidden),
-  };
-
-  const [updateTask] = useUpdateTaskMutation({});
-
-  const onUpdateTaskData = async (comment: string, statusId: number, executorId: number) => {
-    setShowEditTaskForm(false);
-    updateTask({
-      taskId: taskData.id,
-      guid: guid,
-      comment: comment,
-      statusId: statusId,
-      executorId: executorId,
-    });
-  };
-
-  return (
-    <div className={classNames.root}>
-      <div className={s.header}>
-        <div className={s.text}>
-          <Typography className={s.title}>{`№ ${taskData.id}`}</Typography>
-          <Typography className={s.name}>{taskData.name}</Typography>
-        </div>
-        <button className={s.iconButton} onClick={() => setShowEditTaskForm(false)}>
-          <img src={closeIcon} alt='close' />
-        </button>
-      </div>
-      <div className={s.content}>
-        <EditTaskForm
-          executors={executors}
-          statuses={statuses}
-          guid={guid}
-          onUpdateTaskData={onUpdateTaskData}
-          taskData={taskData}
-        />
-      </div>
-    </div>
+export const EditTaskCard = ({ taskId, showEditTaskForm, setShowEditTaskForm }: EditTaskProps) => {
+  const { data: guid } = useGetTenantGuidQuery({});
+  const { data: task, isSuccess } = useGetTaskByIdQuery(
+    { guid, taskId },
+    { skip: !guid || !taskId },
   );
+
+  const classNames = {
+    root: clsx(s.createTask, !showEditTaskForm && s.cardHidden),
+  };
+
+  if (!isSuccess) {
+    return <></>;
+  } else
+    return (
+      <div className={classNames.root}>
+        <div className={s.header}>
+          <div className={s.text}>
+            <Typography className={s.title}>{`№ ${task?.id}`}</Typography>
+            <Typography className={s.name}>{task?.name}</Typography>
+          </div>
+          <button className={s.iconButton} onClick={() => setShowEditTaskForm(false)}>
+            <img src={closeIcon} alt='close' />
+          </button>
+        </div>
+        <div className={s.content}>
+          <EditTaskForm taskId={taskId} setShowEditTaskForm={setShowEditTaskForm} />
+        </div>
+      </div>
+    );
 };
